@@ -15,7 +15,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/protected', protectedRoutes); // Use the protected routes
 app.use('/api/nutrition', nutritionRoutes);
 app.use('/api/progress',progressRoutes);
-app.use('api/workoutRoutes',workoutRoutes);
+app.use('/api/workouts',workoutRoutes);
 
 const allowedOrigins = ['http://yourfrontenddomain.com'];
 
