@@ -91,48 +91,46 @@ res.status(500).send({ message: 'Error logging in user' });
 
 // Get user profile
 router.get('/profile', authenticateToken, async (req, res) => {
-try {
-const userProfile = await UserProfile.findOne({
-where: { userId: req.user.userId }
-});
-
-if (!userProfile) {
-  return res.status(404).json({ message: 'Profile not found' });
-}
-
-res.json(userProfile);
-} catch (error) {
-console.error('Error retrieving profile:', error);
-res.status(500).json({ message: 'Error retrieving profile' });
-}
+  try {
+    const userProfile = await UserProfile.findOne({
+      where: { userId: req.user.userId },
+    });
+    if (!userProfile) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
+    res.json(userProfile);
+  } catch (error) {
+    console.error('Error retrieving profile:', error);
+    res.status(500).json({ message: 'Error retrieving profile' });
+  }
 });
 
 // Update user profile
-router.put('/profile', authenticateToken, async (req, res) => {
-const { age, weight, fitnessGoals, dietaryPreferences } = req.body;
+router.put('/profile/:userId', authenticateToken, async (req, res) => {
+  const { userId } = req.params; // Capture the userId from URL parameters
+  const { age, weight, fitnessGoals, dietaryPreferences } = req.body;
 
-try {
-const userProfile = await UserProfile.findOne({
-where: { userId: req.user.userId }
-});
+  try {
+    const userProfile = await UserProfile.findOne({
+      where: { userId: userId } // Use the captured userId to find the profile
+    });
 
+    if (!userProfile) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
 
-if (!userProfile) {
-  return res.status(404).json({ message: 'Profile not found' });
-}
+    await userProfile.update({
+      age,
+      weight,
+      fitnessGoals,
+      dietaryPreferences
+    });
 
-await userProfile.update({
-  age,
-  weight,
-  fitnessGoals,
-  dietaryPreferences
-});
-
-res.json({ message: 'Profile updated successfully' });
-} catch (error) {
-console.error('Error updating profile:', error);
-res.status(500).json({ message: 'Error updating profile' });
-}
+    res.json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).json({ message: 'Error updating profile' });
+  }
 });
 
 module.exports = router;

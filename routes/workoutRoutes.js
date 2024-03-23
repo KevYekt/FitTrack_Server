@@ -1,109 +1,47 @@
-require('dotenv').config(); // Ensure environment variables are loaded (if needed)
+require('dotenv').config();
 const express = require('express');
-const { Workout } = require('../db'); // Adjust path as needed
-const authenticateToken = require('../middleware');
-const { getExercisesByType } = require('../excerciseDbClient'); // Adjust path as needed
-
+const { Exercise, UserProfile } = require('../db'); // Ensure these are correctly imported
+const authenticateToken = require('../middleware'); // Ensure correct path
+const axios = require('axios');
 const router = express.Router();
 
-// Create a new workout plan
-router.post('/', authenticateToken, async (req, res) => {
-  const { date, type, duration, intensity } = req.body;
-  try {
-    const newWorkout = await Workout.create({
-      userId: req.user.userId,
-      date,
-      type,
-      duration,
-      intensity
-    });
-    res.status(201).json(newWorkout);
-  } catch (error) {
-    console.error('Error creating a workout plan:', error);
-    res.status(500).json({ message: "Error creating workout plan" });
-  }
+// Axios instance for ExerciseDB API
+const exerciseDbApi = axios.create({
+  baseURL: 'https://exercisedb.p.rapidapi.com',
+  headers: {
+    'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+    'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
+  },
 });
 
-// Get all workout plans for a user
-router.get('/', authenticateToken, async (req, res) => {
-  try {
-    const workouts = await Workout.findAll({
-      where: { userId: req.user.userId }
-    });
-    res.json(workouts);
-  } catch (error) {
-    console.error('Error fetching workouts:', error);
-    res.status(500).json({ message: "Error fetching workouts" });
-  }
-});
+// Fetch exercises based on user's fitness goals
+router.get('/exercises/goal', authenticateToken, async (req, res) => {
+  const userId = req.user.userId;
 
-// Get a specific workout plan by ID
-router.get('/:workoutId', authenticateToken, async (req, res) => {
-  const { workoutId } = req.params;
   try {
-    const workout = await Workout.findOne({
-      where: { workoutId, userId: req.user.userId }
+    // Retrieve the user's fitness goal from the UserProfile
+    const userProfile = await UserProfile.findOne({
+      where: { userId },
     });
-    if (!workout) {
-      return res.status(404).json({ message: "Workout not found" });
+
+    if (!userProfile || !userProfile.fitnessGoals) {
+      return res.status(404).json({ message: "User's fitness goal not found." });
     }
-    res.json(workout);
+
+    const bodyPart = userProfile.fitnessGoals; 
+
+    // Fetch exercises from ExerciseDB API based on body part
+    const response = await exerciseDbApi.get(`/exercises/bodyPart/${encodeURIComponent(bodyPart)}`);
+    if(response.data.length > 0) {
+      // Directly send the API's response to the frontend
+      res.status(200).json(response.data.slice(0, 10)); // Limit to first 10 exercises
+    } else {
+      res.status(404).json({ message: 'No exercises found for this body part.' });
+    }
   } catch (error) {
-    console.error('Error fetching workout:', error);
-    res.status(500).json({ message: "Error fetching workout" });
+    console.error('Error fetching exercises:', error);
+    res.status(500).json({ message: 'Error fetching exercises' });
   }
 });
 
-// Update a specific workout plan
-router.put('/:workoutId', authenticateToken, async (req, res) => {
-  const { workoutId } = req.params;
-  const { date, type, duration, intensity } = req.body;
-  try {
-    const [updated] = await Workout.update({
-      date,
-      type,
-      duration,
-      intensity
-    }, {
-      where: { workoutId, userId: req.user.userId }
-    });
-    if (!updated) {
-      return res.status(404).json({ message: "Workout not found" });
-    }
-    res.json({ message: "Workout updated successfully" });
-  } catch (error) {
-    console.error('Error updating workout:', error);
-    res.status(500).json({ message: "Error updating workout" });
-  }
-});
-
-// Delete a specific workout plan
-router.delete('/:workoutId', authenticateToken, async (req, res) => {
-  const { workoutId } = req.params;
-  try {
-    const deleted = await Workout.destroy({
-      where: { workoutId, userId: req.user.userId }
-    });
-    if (!deleted) {
-      return res.status(404).json({ message: "Workout not found" });
-    }
-    res.json({ message: "Workout deleted successfully" });
-  } catch (error) {
-    console.error('Error deleting workout:', error);
-    res.status(500).json({ message: "Error deleting workout" });
-  }
-});
-
-router.get('/exercises/type/:type', authenticateToken, async (req, res) => {
-    const { type } = req.params;
-  
-    try {
-      const exercises = await getExercisesByType(type);
-      res.json(exercises);
-    } catch (error) {
-      console.error(`Error fetching exercises for type ${type}:`, error);
-      res.status(500).json({ message: `Error fetching exercises for type ${type}` });
-    }
-  });
-  
 module.exports = router;

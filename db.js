@@ -34,8 +34,12 @@ const UserProfile = sequelize.define('UserProfile', {
   },
   age: DataTypes.INTEGER,
   weight: DataTypes.FLOAT,
-  fitnessGoals: DataTypes.TEXT,
-  dietaryPreferences: DataTypes.TEXT
+  fitnessGoals: {
+    type: DataTypes.STRING, // Changed from DataTypes.JSON to DataTypes.STRING
+    // No custom getter or setter needed for string type
+  },  dietaryPreferences: {
+    type: DataTypes.JSON, // Now Sequelize expects JSON object
+  },
 }, { timestamps: true });
 
 const Workout = sequelize.define('Workout', {
@@ -44,7 +48,11 @@ const Workout = sequelize.define('Workout', {
     autoIncrement: true,
     primaryKey: true
   },
-  date: DataTypes.DATEONLY,
+  bodyPart: {
+    type: DataTypes.STRING,
+    allowNull: true // Only set if relevant to the type of workout
+  },
+date: DataTypes.DATEONLY,
   type: DataTypes.STRING,
   duration: DataTypes.INTEGER,
   intensity: DataTypes.STRING
@@ -73,7 +81,7 @@ const NutritionLog = sequelize.define('NutritionLog', {
   calories: DataTypes.INTEGER,
   protein: DataTypes.FLOAT,
   carbs: DataTypes.FLOAT,
-  fats: DataTypes.FLOAT
+  fat: DataTypes.FLOAT
 }, { timestamps: true });
 
 const Progress = sequelize.define('Progress', {
