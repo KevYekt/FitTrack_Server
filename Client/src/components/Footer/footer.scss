@@ -1,0 +1,41 @@
+$breakpoint-mobile: 320px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+.footer {
+  background-color: #28a745; // A healthy, energetic green color
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.8rem;
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: $breakpoint-tablet) {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+  }
+
+  .brand {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+
+    @media (min-width: $breakpoint-tablet) {
+      margin-bottom: 0;
+    }
+  }
+
+  .creator {
+    font-style: italic;
+  }
+}

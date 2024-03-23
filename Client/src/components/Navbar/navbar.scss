@@ -1,0 +1,66 @@
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1280px;
+
+// Define primary colors
+$primary-color: #007bff;
+$secondary-color: white;
+
+// Navbar container
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: $primary-color;
+  color: $secondary-color;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  // Remove underline from links
+  a {
+    text-decoration: none;
+  }
+}
+
+// Brand styling
+.navbar-brand {
+  font-size: 1.5rem;
+  font-family: 'Arial', sans-serif; // Change font as you like
+  color: $secondary-color;
+  display: flex;
+  align-items: center;
+
+  // Brand icon
+  .navbar-brand-icon {
+    height: 50px; // Height for the icon
+    margin-right: 10px;
+  }
+}
+
+// Link styling
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+
+  .navbar-link {
+    background: none;
+    border: none;
+    color: $secondary-color;
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+    }
+  }
+}
+
+// Responsive design
+@media (min-width: $breakpoint-tablet) {
+  .navbar { padding: 1rem 4rem; }
+
+  .navbar-brand { font-size: 2rem; }
+
+  .navbar-link { padding: 0.5rem 1rem; }
+} 

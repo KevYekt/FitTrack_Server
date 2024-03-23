@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap");
+.home {
+  font-family: "Poppins", sans-serif;
+}
+.home .hero {
+  text-align: center;
+  padding: 4rem;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/hero.png");
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+@media (min-width: 1280px) {
+  .home .hero {
+    padding: 6rem;
+    background-size: 100% auto;
+  }
+}
+.home .hero h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-family: "Great Vibes", cursive;
+}
+.home .hero p {
+  margin-bottom: 2rem;
+}
+.home .hero button {
+  padding: 0.75rem 1.5rem;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.home .hero button:hover {
+  background-color: #cc5a5a;
+}
+.home .features {
+  padding: 2rem;
+  text-align: center;
+  background-color: #f0f2f5; /* Light background to enhance readability */
+}
+.home .features h2 {
+  color: #007bff;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.home .features .feature-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.home .features .feature-list .feature {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: left;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .home .features .feature-list .feature {
+    width: calc(33.333% - 2rem); /* Three-column layout on tablet and larger screens */
+  }
+}
+.home .features .feature-list .feature img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+}
+.home .features .feature-list .feature h3 {
+  color: #007bff;
+  margin: 0 0 0.5rem;
+}
+.home .features .feature-list .feature p {
+  font-size: 0.875rem;
+}/*# sourceMappingURL=home.css.map */

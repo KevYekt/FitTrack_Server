@@ -1,0 +1,155 @@
+// Define breakpoints
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1280px;
+
+// Define colors
+$primary-color: #4CAF50; // A vibrant green for a lively and energetic feel
+$link-hover-color: #347A2A; // Darker shade of green for hover effects
+$error-color: #f44336; // Red for errors
+$background-color: #e0f7fa; // A more dynamic and sporty background color
+$font-primary: 'Roboto', sans-serif; // Stylish, readable font for text
+$font-headline: 'Oswald', sans-serif; // Attention-grabbing font for headings
+
+// Mixin for responsive design
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: $breakpoint-tablet) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media (min-width: $breakpoint-desktop) {
+      @content;
+    }
+  }
+}
+
+body {
+  background: $background-color; // Dynamic and sporty background color for the body
+  font-family: $font-primary;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profile-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: 100vh;
+
+  .error-message {
+    color: $error-color;
+    margin-bottom: 1rem;
+  }
+
+  form {
+    width: 100%;
+    max-width: 320px; // Adjust form width for mobile default
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        font-size: 1rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-family: $font-headline;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      color: white;
+      background-color: $primary-color;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+}
+
+.link-section {
+  margin-top: 2rem;
+  text-align: center;
+
+  .navigation-link {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    color: $primary-color;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $link-hover-color;
+    }
+  }
+
+  .link-description {
+    font-size: 0.9rem;
+    color: #666;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+}
+
+// Responsive adjustments
+@include respond-to(tablet) {
+  .profile-page-container {
+    form {
+      max-width: 500px; // Wider form on tablet
+    }
+  }
+
+  body, input, textarea, button, .link-description {
+    font-size: calc(1rem + 0.5vw); // Adjust font size for readability
+  }
+}
+
+@include respond-to(desktop) {
+  .profile-page-container {
+    form {
+      max-width: 600px; // Even wider form on desktop
+    }
+  }
+
+  .link-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+
+    .link-description {
+      max-width: 500px; // Allow descriptions to be wider on larger screens
+    }
+  }
+}

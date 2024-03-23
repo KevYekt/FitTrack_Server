@@ -1,0 +1,124 @@
+// Define breakpoints
+$breakpoint-mobile: 0; // default to mobile first
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1280px;
+
+// Define colors and themes
+$primary-color: #4CAF50; // Green for fitness vibes
+$accent-color: #f44336; // Red for accents
+$light-gray: #f4f4f4; // Light gray background
+$dark-gray: #333; // Dark gray text
+$white: #ffffff; // White color
+$black: #000000; // Black color
+
+// Mixin for responsive design
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: $breakpoint-tablet) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media (min-width: $breakpoint-desktop) {
+      @content;
+    }
+  }
+}
+
+// Base workout page styling
+.workout-page {
+  padding: 1rem; // Default to mobile view padding
+  background: $light-gray;
+  min-height: 100vh;
+  color: $dark-gray;
+
+  h1 {
+    text-align: center;
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+
+  .error {
+    color: $accent-color;
+    text-align: center;
+  }
+
+  .exercise-list {
+    list-style: none;
+    padding: 0;
+
+    .exercise-item {
+      background-color: $white;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba($black, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .exercise-details {
+        max-width: 300px; // Max width for mobile view
+
+        h2 {
+          font-size: 1.5rem;
+          color: $primary-color;
+          margin-bottom: 0.5rem;
+        }
+
+        p {
+          color: $dark-gray;
+          margin-bottom: 0.5rem;
+
+          &.equipment {
+            font-style: italic;
+            color: $accent-color;
+          }
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+          margin-bottom: 1rem;
+        }
+
+        .instructions {
+          background: $primary-color;
+          color: $white;
+          padding: 0.5rem;
+          border-radius: 4px;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+  
+  // Tablet styles
+  @include respond-to(tablet) {
+    padding: 1.5rem;
+
+    .exercise-item .exercise-details {
+      max-width: 500px; // Increased width for tablet
+    }
+  }
+
+  // Desktop styles
+  @include respond-to(desktop) {
+    padding: 2rem;
+
+    .exercise-item {
+      flex-direction: row; // Horizontal layout for desktop
+      justify-content: space-between;
+
+      .exercise-details {
+        max-width: none; // Remove max width for desktop
+        margin-right: 2rem; // Space between text and image
+      }
+
+      img {
+        width: 250px; // Fixed size for desktop
+      }
+    }
+  }
+}

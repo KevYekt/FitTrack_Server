@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap');
+
+.home {
+  font-family: 'Poppins', sans-serif;
+
+  .hero {
+    text-align: center;
+    padding: 4rem;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../assets/hero.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+
+    @media (min-width: 1280px) {
+        padding: 6rem; // Increased padding for a larger view
+        background-size: 100% auto; // Ensure full width of the image is shown
+      }
+    
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-family: 'Great Vibes', cursive;
+    }
+
+    p {
+      margin-bottom: 2rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #cc5a5a;
+      }
+    }
+  }
+
+  .features {
+    padding: 2rem;
+    text-align: center;
+    background-color: #f0f2f5; /* Light background to enhance readability */
+
+    h2 {
+      color: #007bff;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+
+      .feature {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        text-align: left;
+        width: 100%;
+
+        @media (min-width: 768px) {
+          width: calc(33.333% - 2rem); /* Three-column layout on tablet and larger screens */
+        }
+
+        img {
+          width: 100%; // make image responsive to container width
+          max-width: 200px; // set a maximum width to ensure images don't get too large
+          height: auto; // maintain aspect ratio
+          border-radius: 10px; // rounded corners for modern look
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // subtle shadow to lift image off the page
+          margin-bottom: 1rem; // ensure consistent space below the image
+          object-fit: cover; // ensure the image covers the area nicely
+        }
+  
+
+        h3 {
+          color: #007bff;
+          margin: 0 0 0.5rem;
+        }
+
+        p {
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+}

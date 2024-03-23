@@ -1,0 +1,83 @@
+.workout-page {
+  padding: 1rem;
+  background: #f4f4f4;
+  min-height: 100vh;
+  color: #333;
+}
+.workout-page h1 {
+  text-align: center;
+  color: #4CAF50;
+  margin-bottom: 1rem;
+}
+.workout-page .error {
+  color: #f44336;
+  text-align: center;
+}
+.workout-page .exercise-list {
+  list-style: none;
+  padding: 0;
+}
+.workout-page .exercise-list .exercise-item {
+  background-color: #ffffff;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.workout-page .exercise-list .exercise-item .exercise-details {
+  max-width: 300px;
+}
+.workout-page .exercise-list .exercise-item .exercise-details h2 {
+  font-size: 1.5rem;
+  color: #4CAF50;
+  margin-bottom: 0.5rem;
+}
+.workout-page .exercise-list .exercise-item .exercise-details p {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+.workout-page .exercise-list .exercise-item .exercise-details p.equipment {
+  font-style: italic;
+  color: #f44336;
+}
+.workout-page .exercise-list .exercise-item .exercise-details img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.workout-page .exercise-list .exercise-item .exercise-details .instructions {
+  background: #4CAF50;
+  color: #ffffff;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+@media (min-width: 768px) {
+  .workout-page {
+    padding: 1.5rem;
+  }
+  .workout-page .exercise-item .exercise-details {
+    max-width: 500px;
+  }
+}
+@media (min-width: 1280px) {
+  .workout-page {
+    padding: 2rem;
+  }
+  .workout-page .exercise-item {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .workout-page .exercise-item .exercise-details {
+    max-width: none;
+    margin-right: 2rem;
+  }
+  .workout-page .exercise-item img {
+    width: 250px;
+  }
+}/*# sourceMappingURL=workouts.css.map */

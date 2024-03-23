@@ -1,0 +1,73 @@
+.nutrition-logs-page {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e8eff1; // Changed background color
+
+  
+    h1 {
+        margin-bottom: 20px;
+        font-family: 'Merriweather', serif; // More dramatic font for the title
+        color: #333; // Darker color for better contrast
+        text-shadow: 1px 1px 2px #aaa; // Optional text shadow for depth   
+    }
+    .error-message {
+      color: red;
+    }
+  
+    .recipe-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      width: 100%;
+    }
+  
+    .recipe-card {
+      background-color: #f7f7f7;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        transform: scale(1.05); // Scales up the card on hover
+      }
+  
+      h3 {
+        margin-top: 0;
+      }
+    }
+  
+    .next-recipes-button {
+      padding: 10px 20px;
+      margin-top: 30px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+  
+  // Tablet view
+  @media (min-width: 768px) {
+    .nutrition-logs-page {
+      .recipe-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+  
+  // Desktop view
+  @media (min-width: 1280px) {
+    .nutrition-logs-page {
+      .recipe-list {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }

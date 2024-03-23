@@ -1,0 +1,109 @@
+body {
+  background: #e0f7fa;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profile-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+.profile-page-container .error-message {
+  color: #f44336;
+  margin-bottom: 1rem;
+}
+.profile-page-container form {
+  width: 100%;
+  max-width: 320px;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.profile-page-container form .form-group {
+  margin-bottom: 1.5rem;
+}
+.profile-page-container form .form-group label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-family: "Oswald", sans-serif;
+}
+.profile-page-container form .form-group input, .profile-page-container form .form-group select, .profile-page-container form .form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+.profile-page-container form .form-group input:focus, .profile-page-container form .form-group select:focus, .profile-page-container form .form-group textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+.profile-page-container form .form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.profile-page-container form button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.profile-page-container form button:hover {
+  background-color: #3d8b40;
+}
+
+.link-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+.link-section .navigation-link {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: #4CAF50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.link-section .navigation-link:hover {
+  color: #347A2A;
+}
+.link-section .link-description {
+  font-size: 0.9rem;
+  color: #666;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .profile-page-container form {
+    max-width: 500px;
+  }
+  body, input, textarea, button, .link-description {
+    font-size: calc(1rem + 0.5vw);
+  }
+}
+@media (min-width: 1280px) {
+  .profile-page-container form {
+    max-width: 600px;
+  }
+  .link-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .link-section .link-description {
+    max-width: 500px;
+  }
+}/*# sourceMappingURL=profile.css.map */
