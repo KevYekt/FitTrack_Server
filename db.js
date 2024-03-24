@@ -33,6 +33,7 @@ const UserProfile = sequelize.define('UserProfile', {
     primaryKey: true
   },
   age: DataTypes.INTEGER,
+  goalWeight: DataTypes.FLOAT, 
   weight: DataTypes.FLOAT,
   fitnessGoals: {
     type: DataTypes.STRING, // Changed from DataTypes.JSON to DataTypes.STRING
@@ -172,7 +173,7 @@ const UserWorkouts = sequelize.define('UserWorkouts', {
       key: 'userId',
     }
   },
-  externalWorkoutId: { // Changed from workoutId to externalWorkoutId
+  workoutId: { // Changed from workoutId to externalWorkoutId
     type: DataTypes.STRING, // Assuming external IDs are strings
     allowNull: false
   },

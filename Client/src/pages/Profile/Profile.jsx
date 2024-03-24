@@ -12,6 +12,8 @@ const ProfilePage = () => {
     weight: '',
     fitnessGoals: '',
     dietaryPreferences: '',
+    goalWeight: '', 
+
   });
   const [error, setError] = useState('');
   const bodyParts = [
@@ -54,11 +56,14 @@ const ProfilePage = () => {
     if (token) {
       const decoded = jwtDecode(token);
       const userId = decoded.userId;
+      const currentDate = new Date().toISOString().split('T')[0];
 
       const updatedProfileData = {
         ...profileData,
-        dietaryPreferences: JSON.stringify(profileData.dietaryPreferences)
+        dietaryPreferences: JSON.stringify(profileData.dietaryPreferences),
+        updateDate: currentDate
       };
+      
   
 
       try {
@@ -98,6 +103,17 @@ const ProfilePage = () => {
             name="weight"
             id="weight"
             value={profileData.weight || ''}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="goalWeight">Goal Weight:</label>
+          <input
+            type="number"
+            name="goalWeight"
+            id="goalWeight"
+            value={profileData.goalWeight || ''}
             onChange={handleInputChange}
             required
           />

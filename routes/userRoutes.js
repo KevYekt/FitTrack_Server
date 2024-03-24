@@ -106,7 +106,7 @@ router.get('/profile', authenticateToken, async (req, res) => {
 // Update user profile
 router.put('/profile/:userId', authenticateToken, async (req, res) => {
   const { userId } = req.params; 
-  const { age, weight, fitnessGoals, dietaryPreferences } = req.body;
+  const { age, weight, fitnessGoals, dietaryPreferences, goalWeight, updateDate } = req.body;
 
   try {
     const userProfile = await UserProfile.findOne({
@@ -121,7 +121,10 @@ router.put('/profile/:userId', authenticateToken, async (req, res) => {
       age,
       weight,
       fitnessGoals,
-      dietaryPreferences
+      dietaryPreferences,
+      goalWeight,
+      updatedAt: updateDate
+      
     });
 
     res.json({ message: 'Profile updated successfully' });
@@ -130,6 +133,9 @@ router.put('/profile/:userId', authenticateToken, async (req, res) => {
     res.status(500).json({ message: 'Error updating profile' });
   }
 });
+
+
+
 
 module.exports = router;
 

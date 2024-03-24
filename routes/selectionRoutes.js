@@ -2,11 +2,12 @@ const express = require('express');
 const { User, UserWorkouts, RecipeSelection } = require('../db');
 const authenticateToken = require('../middleware');
 const router = express.Router();
+const { Progress } = require('../db');
 
 // POST route for adding a workout selection with external workout IDs
 router.post('/workouts', authenticateToken, async (req, res) => {
     // Changed parameter name from workoutIds to externalWorkoutIds for clarity
-    const { userId, externalWorkoutIds, date } = req.body; // **CHANGED**
+    const { userId, workoutIds, date } = req.body; // **CHANGED**
 
     try {
       // Verify the user exists
@@ -17,9 +18,9 @@ router.post('/workouts', authenticateToken, async (req, res) => {
   
       // Prepare workout selection records using externalWorkoutIds
       // Changed to use externalWorkoutId in the map function
-      const workoutSelections = externalWorkoutIds.map(externalWorkoutId => ({ // **CHANGED**
+      const workoutSelections = workoutIds.map(workoutId => ({ // **CHANGED**
         userId,
-        externalWorkoutId, // **CHANGED** (assuming your UserWorkouts model now has an externalWorkoutId field)
+        workoutId, // **CHANGED** (assuming your UserWorkouts model now has an externalWorkoutId field)
         date
       }));
   
@@ -83,6 +84,60 @@ router.get('/recipes', authenticateToken, async (req, res) => {
   } catch (error) {
     console.error('Error fetching recipe selections:', error);
     res.status(500).json({ message: 'Error fetching recipe selections' });
+  }
+});
+
+
+router.post('/weight', authenticateToken, async (req, res) => {
+  const { userId } = req.user; // Assuming userId is available in req.user after authentication
+  const { date, weight } = req.body;
+
+  try {
+      // Optional: Validate input (e.g., date format, weight as a positive number)
+
+      // Check if a weight entry for the specified date already exists
+      const existingEntry = await Progress.findOne({
+          where: { userId, date }
+      });
+
+      if (existingEntry) {
+          // Update existing entry
+          existingEntry.weight = weight;
+          await existingEntry.save();
+          res.status(200).json({ message: "Weight entry updated successfully" });
+      } else {
+          // Create new entry
+          const newEntry = await Progress.create({
+              userId,
+              date,
+              weight
+          });
+          res.status(201).json({ message: "Weight entry added successfully", entry: newEntry });
+      }
+  } catch (error) {
+      console.error('Error managing weight entry:', error);
+      res.status(500).json({ message: 'Error managing weight entry' });
+  }
+});
+
+router.get('/weight/:userId', authenticateToken, async (req, res) => {
+  const { userId } = req.params;
+
+  // Optional: Check if the authenticated user is allowed to fetch this data
+  if (req.user.id !== parseInt(userId, 10)) {
+      return res.status(403).json({ message: "Unauthorized access." });
+  }
+
+  try {
+      const weightEntries = await Progress.findAll({
+          where: { userId },
+          order: [['date', 'ASC']] // Sorting by date in ascending order
+      });
+
+      res.status(200).json(weightEntries);
+  } catch (error) {
+      console.error('Error fetching weight data:', error);
+      res.status(500).json({ message: 'Error fetching weight data' });
   }
 });
 
