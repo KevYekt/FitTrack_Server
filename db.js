@@ -48,27 +48,39 @@ const Workout = sequelize.define('Workout', {
     autoIncrement: true,
     primaryKey: true
   },
+  externalId: {
+    type: DataTypes.STRING, // Assuming external API gives a unique ID for the workout
+    allowNull: true // Set true if not all workouts are from external API
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false // Assuming the workout's name is always provided
+  },
   bodyPart: {
     type: DataTypes.STRING,
-    allowNull: true // Only set if relevant to the type of workout
+    allowNull: true // Set true if the body part may not always be provided
   },
-date: DataTypes.DATEONLY,
-  type: DataTypes.STRING,
-  duration: DataTypes.INTEGER,
-  intensity: DataTypes.STRING
-}, { timestamps: true });
+  equipment: {
+    type: DataTypes.STRING,
+    allowNull: true // Set true if the equipment may not always be provided
+  },
+  target: {
+    type: DataTypes.STRING,
+    allowNull: true // Set true if the target muscle group may not always be provided
+  },
+  gifUrl: {
+    type: DataTypes.STRING,
+    allowNull: true // Set true if the gif URL may not always be provided
+  },
+  instructions: {
+    type: DataTypes.TEXT, // TEXT type for potentially long strings
+    allowNull: true // Set true if the instructions may not always be provided
+  },
+}, {
+  timestamps: true, // Enable timestamps if you want createdAt and updatedAt
+});
 
-const Exercise = sequelize.define('Exercise', {
-  exerciseId: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  name: DataTypes.STRING,
-  sets: DataTypes.INTEGER,
-  reps: DataTypes.INTEGER,
-  weight: DataTypes.FLOAT
-}, { timestamps: true });
+module.exports = Workout;
 
 const NutritionLog = sequelize.define('NutritionLog', {
   logId: {
@@ -96,6 +108,80 @@ const Progress = sequelize.define('Progress', {
   muscleMass: DataTypes.FLOAT
 }, { timestamps: true });
 
+const WorkoutSelection = sequelize.define('WorkoutSelection', {
+  selectionId: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'Users', 
+      key: 'userId',
+    }
+  },
+  workoutId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'Workouts', 
+      key: 'workoutId',
+    }
+  },
+  date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false
+  }
+}, { timestamps: true });
+
+const RecipeSelection = sequelize.define('RecipeSelection', {
+  selectionId: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'Users',
+      key: 'userId',
+    }
+  },
+  recipeId: {
+    type: DataTypes.STRING, 
+    allowNull: false
+  },
+  date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false
+  }
+}, { timestamps: true });
+
+
+// Adjusting UserWorkouts model
+const UserWorkouts = sequelize.define('UserWorkouts', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'User',
+      key: 'userId',
+    }
+  },
+  externalWorkoutId: { // Changed from workoutId to externalWorkoutId
+    type: DataTypes.STRING, // Assuming external IDs are strings
+    allowNull: false
+  },
+  date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false
+  }
+}, { timestamps: true });
+
 // Define Associations
 User.hasOne(UserProfile, { foreignKey: 'userId' });
 UserProfile.belongsTo(User, { foreignKey: 'userId' });
@@ -103,14 +189,22 @@ UserProfile.belongsTo(User, { foreignKey: 'userId' });
 User.hasMany(Workout, { foreignKey: 'userId' });
 Workout.belongsTo(User, { foreignKey: 'userId' });
 
-Workout.hasMany(Exercise, { foreignKey: 'workoutId' });
-Exercise.belongsTo(Workout, { foreignKey: 'workoutId' });
+
 
 User.hasMany(NutritionLog, { foreignKey: 'userId' });
 NutritionLog.belongsTo(User, { foreignKey: 'userId' });
 
 User.hasMany(Progress, { foreignKey: 'userId' });
 Progress.belongsTo(User, { foreignKey: 'userId' });
+
+User.hasMany(WorkoutSelection, { foreignKey: 'userId' });
+WorkoutSelection.belongsTo(User, { foreignKey: 'userId' });
+
+User.hasMany(RecipeSelection, { foreignKey: 'userId' });
+RecipeSelection.belongsTo(User, { foreignKey: 'userId' });
+
+User.belongsToMany(Workout, { through: UserWorkouts, foreignKey: 'userId' });
+Workout.belongsToMany(User, { through: UserWorkouts, foreignKey: 'workoutId' });
 
 // Synchronize models with the database
 sequelize.sync({ force: false }).then(() => {
@@ -121,7 +215,9 @@ module.exports = {
   User,
   UserProfile,
   Workout,
-  Exercise,
   NutritionLog,
-  Progress
+  Progress,
+  WorkoutSelection,
+  RecipeSelection,
+  UserWorkouts, 
 };

@@ -25,7 +25,6 @@ router.post('/register', async (req, res) => {
     // Create user profile
     const newUserProfile = await UserProfile.create({
       userId: newUser.userId
-      // Other profile fields can be set as default or based on additional request info
     });
 
     // Send back the new user's information
@@ -38,7 +37,6 @@ router.post('/register', async (req, res) => {
       },
       profile: {
         profileId: newUserProfile.profileId
-        // Other profile fields can be included here
       }
     });
   } catch (error) {
@@ -107,7 +105,7 @@ router.get('/profile', authenticateToken, async (req, res) => {
 
 // Update user profile
 router.put('/profile/:userId', authenticateToken, async (req, res) => {
-  const { userId } = req.params; // Capture the userId from URL parameters
+  const { userId } = req.params; 
   const { age, weight, fitnessGoals, dietaryPreferences } = req.body;
 
   try {

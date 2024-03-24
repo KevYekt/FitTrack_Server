@@ -144,6 +144,10 @@ const ProfilePage = () => {
         <Link to="/nutrition-logs" className="navigation-link">View Nutrition Logs</Link>
         <p className="link-description">Keep track of your diet and nutritional intake.</p>
       </div>
+      <div className="link-section">
+        <Link to="/progress-reports" className="navigation-link">View Progress Reports</Link>
+        <p className="link-description">Review your fitness and nutrition progress over time.</p>
+      </div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import LoginForm from './pages/Auth/loginForm';
 import RegisterForm from './pages/Auth/registerForm';
 import ProfilePage from './pages/Profile/Profile';
 import WorkoutPage from './pages/Workouts/Workouts';
-import NutritionLogsPage from './pages/Nutrition/NutritionLogsPage'; // Ensure this is correctly imported
+import NutritionLogsPage from './pages/Nutrition/NutritionLogsPage'; 
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

@@ -5,6 +5,7 @@ const protectedRoutes = require('./routes/protectedRoutes.js');
 const workoutRoutes = require('./routes/workoutRoutes.js');
 const progressRoutes = require('./routes/progressRoutes.js');
 const nutritionRoutes = require('./routes/nutritionRoutes.js');
+const selectionRoutes = require('./routes/selectionRoutes');
 const cors = require('cors');
 const app = express();
 
@@ -20,9 +21,9 @@ app.use('/api/protected', protectedRoutes);
 app.use('/api/nutrition', nutritionRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/workouts', workoutRoutes);
+app.use('/api/selections', selectionRoutes);
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'Client', 'build', 'index.html'));
 });

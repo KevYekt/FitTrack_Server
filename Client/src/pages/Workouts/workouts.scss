@@ -4,10 +4,10 @@ $breakpoint-tablet: 768px;
 $breakpoint-desktop: 1280px;
 
 // Define colors and themes
-$primary-color: #4CAF50; // Green for fitness vibes
-$accent-color: #f44336; // Red for accents
-$light-gray: #f4f4f4; // Light gray background
-$dark-gray: #333; // Dark gray text
+$primary-color: #28a745; // A vibrant green for energy
+$accent-color: #17a2b8; // Bright blue for accents
+$light-gray: #f5f5f5; // Light gray for background
+$dark-gray: #343a40; // Dark gray for text
 $white: #ffffff; // White color
 $black: #000000; // Black color
 
@@ -24,51 +24,73 @@ $black: #000000; // Black color
   }
 }
 
+// Google Font Import
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Work+Sans:wght@500;600&display=swap');
+
+// Base body styling
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: $light-gray;
+}
+
 // Base workout page styling
 .workout-page {
-  padding: 1rem; // Default to mobile view padding
+  padding: 20px; // Default to mobile view padding
   background: $light-gray;
   min-height: 100vh;
-  color: $dark-gray;
 
   h1 {
+    font-family: 'Work Sans', sans-serif;
     text-align: center;
     color: $primary-color;
-    margin-bottom: 1rem;
+    margin-bottom: 20px;
+    font-size: 2rem;
   }
 
   .error {
     color: $accent-color;
     text-align: center;
+    margin: 10px 0;
   }
 
   .exercise-list {
     list-style: none;
     padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
 
     .exercise-item {
       background-color: $white;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba($black, 0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba($black, 0.1);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.02);
+      }
 
       .exercise-details {
-        max-width: 300px; // Max width for mobile view
+        padding: 15px;
+        text-align: center;
 
         h2 {
+          font-family: 'Work Sans', sans-serif;
+          color: $dark-gray;
           font-size: 1.5rem;
-          color: $primary-color;
-          margin-bottom: 0.5rem;
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+          margin-top: 15px;
+          border-radius: 10px;
         }
 
         p {
           color: $dark-gray;
-          margin-bottom: 0.5rem;
+          margin-top: 10px;
+          font-size: 0.9rem;
 
           &.equipment {
             font-style: italic;
@@ -76,49 +98,41 @@ $black: #000000; // Black color
           }
         }
 
-        img {
-          width: 100%;
-          height: auto;
-          border-radius: 8px;
-          margin-bottom: 1rem;
-        }
-
-        .instructions {
-          background: $primary-color;
-          color: $white;
-          padding: 0.5rem;
-          border-radius: 4px;
-          font-size: 0.9rem;
+        input[type="checkbox"] {
+          margin-right: 10px;
         }
       }
     }
   }
-  
+
   // Tablet styles
   @include respond-to(tablet) {
-    padding: 1.5rem;
-
-    .exercise-item .exercise-details {
-      max-width: 500px; // Increased width for tablet
+    .exercise-list {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
     }
   }
 
   // Desktop styles
   @include respond-to(desktop) {
-    padding: 2rem;
+    .exercise-list {
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 30px;
+    }
+  }
 
-    .exercise-item {
-      flex-direction: row; // Horizontal layout for desktop
-      justify-content: space-between;
+  button {
+    background-color: $primary-color;
+    color: $white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 
-      .exercise-details {
-        max-width: none; // Remove max width for desktop
-        margin-right: 2rem; // Space between text and image
-      }
-
-      img {
-        width: 250px; // Fixed size for desktop
-      }
+    &:hover {
+      background-color: darken($primary-color, 10%);
     }
   }
 }

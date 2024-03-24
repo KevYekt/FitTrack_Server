@@ -25,12 +25,10 @@ router.get('/recipesByNutrients', authenticateToken, async (req, res) => {
       return res.status(404).json({ message: "User's dietary preferences not found." });
     }
 
-    // Assuming dietaryPreferences are stored as JSON or as a key that can be directly used
     const dietaryPreferences = JSON.parse(userProfile.dietaryPreferences);
 
     const params = {
-        number: '10', // Limit the number of recipes returned to 10
-        // Adjust parameters based on dietaryPreferences
+        number: '10', 
         minProtein: dietaryPreferences.includes('high protein') ? '50' : undefined,
         minCalories: dietaryPreferences.includes('high calories') ? '500' : undefined,
         maxCalories: dietaryPreferences.includes('low calories') ? '300' : undefined,

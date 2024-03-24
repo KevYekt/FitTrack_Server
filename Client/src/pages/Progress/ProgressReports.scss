@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Variables */
+$primary-color: #2a9d8f; // Teal color for primary actions and highlights
+$secondary-color: #264653; // Dark blue for secondary elements and text
+$background-color: #f0f3f5; // Light grey for background
+$modal-background-color: #ffffff; // White for modal backgrounds
+$error-color: #e76f51; // Red for error messages
+$button-hover-color: #3a6f7e; // Darker teal for button hover state
+
+/* Base styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: $background-color;
+}
+
+/* Progress Reports Page */
+.progress-reports-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+
+  h1 {
+    color: $primary-color;
+    margin-bottom: 20px;
+  }
+
+  .error {
+    color: $error-color;
+    margin: 15px 0;
+  }
+}
+
+/* Custom Calendar Styles */
+.custom-calendar {
+  width: 100%;
+  max-width: 350px; // Limit the calendar width on larger screens
+  border: 2px solid $primary-color;
+  border-radius: 8px;
+  margin-top: 20px;
+
+  .react-calendar__navigation {
+    button {
+      font-size: 16px;
+      color: $secondary-color;
+    }
+  }
+
+  .react-calendar__month-view__days__day {
+    &:hover {
+      background-color: $primary-color;
+      color: $modal-background-color;
+    }
+  }
+
+  .react-calendar__tile--active,
+  .react-calendar__tile--active:enabled:hover,
+  .react-calendar__tile--active:enabled:focus {
+    background-color: $primary-color;
+    color: $modal-background-color;
+  }
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $modal-background-color;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+
+  button {
+    background-color: $primary-color;
+    color: $modal-background-color;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $button-hover-color;
+    }
+  }
+}
+
+/* Responsive Design Adjustments */
+@media (min-width: 768px) {
+  /* Tablet styles */
+  .custom-calendar {
+    max-width: 500px; // Slightly larger calendar on tablets
+  }
+}
+
+@media (min-width: 1280px) {
+  /* Desktop styles */
+  .progress-reports-page {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+
+    .custom-calendar {
+      max-width: 750px; // Full-size calendar on desktop
+    }
+  }
+}
