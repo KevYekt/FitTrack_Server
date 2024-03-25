@@ -6,13 +6,14 @@ import './workouts.scss';
 const WorkoutPage = () => {
   const [exercises, setExercises] = useState([]);
   const [selectedExercises, setSelectedExercises] = useState(new Set());
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
 
   useEffect(() => {
     const fetchExercises = async () => {
       const token = localStorage.getItem('token');
       console.log('Token:', token);
       try {
-        const response = await axios.get('http://localhost:3000/api/workouts/exercises/goal', {
+        const response = await axios.get(`${BASE_URL}/api/workouts/exercises/goal`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -49,7 +50,7 @@ const WorkoutPage = () => {
     const userId = decoded.userId; // Extract userId from decoded token
 
     try {
-      await axios.post('http://localhost:3000/api/selections/workouts', {
+      await axios.post(`${BASE_URL}/api/selections/workouts`, {
         userId,
         workoutIds: Array.from(selectedExercises),
         date: new Date().toISOString().split('T')[0],

@@ -5,6 +5,8 @@ import axios from 'axios';
 import './registerForm.scss';
 
 const RegisterForm = () => {
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
+
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -21,7 +23,7 @@ const RegisterForm = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/users/register', formData);
+      const response = await axios.post(`${BASE_URL}/api/users/register`, formData);
       localStorage.setItem('token', response.data.token); // Store the token
       navigate('/profile'); // Navigate to profile page
     } catch (error) {

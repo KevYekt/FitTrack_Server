@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import './loginForm.scss';
 import axios from 'axios';
 
+
 const LoginForm = ({ onLoginSuccess }) => {
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ const LoginForm = ({ onLoginSuccess }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/users/login', {
+      const response = await axios.post(`${BASE_URL}/api/users/login`, {
         email,
         password,
       });

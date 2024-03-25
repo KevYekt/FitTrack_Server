@@ -1,42 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap");
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #28a745;
+  background-color: #007bff;
   color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .navbar a {
   text-decoration: none;
-  color: white;
-  display: flex;
-  align-items: center;
-}
-.navbar a:before {
-  content: "";
-  display: block;
-  height: 20px;
-  width: 20px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin-right: 10px;
-}
-.navbar a.profile-link:before {
-  background-image: url("../../assets/profile_resized.png");
-}
-.navbar a.login-link:before {
-  background-image: url("../../assets/login.jpg");
-}
-.navbar a.register-link:before {
-  background-image: url("../../assets/RegisterIcon.png");
 }
 
 .navbar-brand {
-  font-family: "Roboto Condensed", sans-serif;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-family: "Arial", sans-serif;
+  color: white;
   display: flex;
   align-items: center;
 }
@@ -59,7 +37,7 @@
   transition: background-color 0.2s ease-in-out;
 }
 .navbar-links .navbar-link:hover {
-  background-color: #34ce57;
+  background-color: #3395ff;
 }
 
 @media (min-width: 768px) {
@@ -71,10 +49,5 @@
   }
   .navbar-link {
     padding: 0.5rem 1rem;
-  }
-}
-@media (min-width: 1280px) {
-  .navbar-brand {
-    font-size: 2.5rem;
   }
 }/*# sourceMappingURL=navbar.css.map */

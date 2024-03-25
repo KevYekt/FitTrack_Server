@@ -7,6 +7,8 @@ import './profile.scss';
 
 
 const ProfilePage = () => {
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
+
   const [profileData, setProfileData] = useState({
     age: '',
     weight: '',
@@ -24,7 +26,7 @@ const ProfilePage = () => {
   // Function to fetch profile data
   const fetchProfile = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/users/profile`, {
+      const response = await axios.get(`${BASE_URL}/api/users/profile`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -67,7 +69,7 @@ const ProfilePage = () => {
   
 
       try {
-        await axios.put(`http://localhost:3000/api/users/profile/${userId}`, updatedProfileData, {
+        await axios.put(`${BASE_URL}/api/users/profile/${userId}`, updatedProfileData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

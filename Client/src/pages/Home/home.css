@@ -66,9 +66,14 @@
   }
 }
 .home .features .feature-list .feature img {
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .home .features .feature-list .feature h3 {
   color: #007bff;

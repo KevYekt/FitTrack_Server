@@ -7,8 +7,10 @@ const NutritionLogsPage = () => {
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipes, setSelectedRecipes] = useState(new Set());
   const [error, setError] = useState('');
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
 
   useEffect(() => {
+
     const fetchRecipes = async () => {
       try {
         const token = localStorage.getItem('token');
@@ -16,7 +18,7 @@ const NutritionLogsPage = () => {
           setError('Authentication error. Please log in.');
           return;
         }
-        const response = await axios.get('http://localhost:3000/api/nutrition/recipesByNutrients', {
+        const response = await axios.get(`${BASE_URL}/api/nutrition/recipesByNutrients`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -53,7 +55,7 @@ const NutritionLogsPage = () => {
     const recipeIdsArray = Array.from(selectedRecipes);
     
     try {
-      await axios.post('http://localhost:3000/api/selections/recipes', {
+      await axios.post(`${BASE_URL}api/selections/recipes`, {
         recipeIds: recipeIdsArray,
         date: new Date().toISOString().split('T')[0],
       }, {

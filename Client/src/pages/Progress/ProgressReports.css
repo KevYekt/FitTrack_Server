@@ -1,0 +1,40 @@
+.progress-reports-page {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.progress-reports-page h1 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.progress-reports-page canvas {
+  max-width: 100%;
+  height: auto;
+}
+.progress-reports-page p {
+  color: red;
+}
+
+@media (min-width: 768px) {
+  .progress-reports-page {
+    padding: 40px;
+  }
+  .progress-reports-page h1 {
+    font-size: 2rem;
+  }
+  .progress-reports-page canvas {
+    max-width: 100%;
+  }
+}
+@media (min-width: 1280px) {
+  .progress-reports-page {
+    padding: 60px;
+  }
+  .progress-reports-page h1 {
+    font-size: 2.5rem;
+  }
+  .progress-reports-page canvas {
+    max-width: 100%;
+  }
+}/*# sourceMappingURL=ProgressReports.css.map */

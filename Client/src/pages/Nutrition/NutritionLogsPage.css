@@ -8,42 +8,60 @@
 .nutrition-logs-page h1 {
   margin-bottom: 20px;
   font-family: "Merriweather", serif;
-  color: #333;
-  text-shadow: 1px 1px 2px #aaa;
+  color: #2c3e50;
+  text-shadow: 1px 1px 0px #6c7a89;
 }
-.nutrition-logs-page .error-message {
-  color: red;
+.nutrition-logs-page .error {
+  color: #e74c3c;
+  margin: 15px 0;
+  font-weight: bold;
 }
 .nutrition-logs-page .recipe-list {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
   width: 100%;
+  max-width: 800px;
 }
 .nutrition-logs-page .recipe-card {
-  background-color: #f7f7f7;
+  background-color: #fff;
   padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 .nutrition-logs-page .recipe-card:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+}
+.nutrition-logs-page .recipe-card img {
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 .nutrition-logs-page .recipe-card h3 {
-  margin-top: 0;
+  color: #34495e;
+  margin: 0 0 10px;
 }
-.nutrition-logs-page .next-recipes-button {
-  padding: 10px 20px;
-  margin-top: 30px;
-  background-color: #007bff;
-  color: white;
+.nutrition-logs-page .recipe-card div {
+  color: #7f8c8d;
+  margin-bottom: 5px;
+}
+.nutrition-logs-page button.submit-button {
+  padding: 10px 25px;
+  background-color: #16a085;
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s;
+  outline: none;
+  margin-top: 20px;
 }
-.nutrition-logs-page .next-recipes-button:hover {
-  background-color: #0056b3;
+.nutrition-logs-page button.submit-button:hover {
+  background-color: #1abc9c;
+}
+.nutrition-logs-page button.submit-button:active {
+  transform: scale(0.98);
 }
 
 @media (min-width: 768px) {
@@ -51,7 +69,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
+  .nutrition-logs-page {
+    padding: 40px;
+  }
   .nutrition-logs-page .recipe-list {
     grid-template-columns: repeat(3, 1fr);
   }

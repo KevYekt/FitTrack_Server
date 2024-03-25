@@ -10,6 +10,8 @@ import { CategoryScale, Chart, LinearScale, PointElement, LineElement } from "ch
 
 
 const ProgressReports = () => {
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
+
   Chart.register(CategoryScale);
   Chart.register(LinearScale);
   Chart.register(PointElement);
@@ -30,7 +32,7 @@ const ProgressReports = () => {
 
       try {
         const { userId } = jwtDecode(token);
-        const response = await axios.get(`http://localhost:3000/api/selections/weight/${userId}`, {
+        const response = await axios.get(`${BASE_URL}api/selections/weight/${userId}`, {
           headers: { Authorization: `Bearer ${token}` }
       });
       setWeightData(response.data);
