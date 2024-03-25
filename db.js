@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
+
 // Initialize Sequelize
 const sequelize = new Sequelize('fittrack_db', 'root', 'rootroot', {
   host: 'localhost',
@@ -39,7 +40,7 @@ const UserProfile = sequelize.define('UserProfile', {
     type: DataTypes.STRING, // Changed from DataTypes.JSON to DataTypes.STRING
     // No custom getter or setter needed for string type
   },  dietaryPreferences: {
-    type: DataTypes.JSON, // Now Sequelize expects JSON object
+    type: DataTypes.JSON, 
   },
 }, { timestamps: true });
 

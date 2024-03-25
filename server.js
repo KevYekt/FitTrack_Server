@@ -1,4 +1,5 @@
 const express = require('express');
+
 const path = require('path');
 const userRoutes = require('./routes/userRoutes.js');
 const protectedRoutes = require('./routes/protectedRoutes.js');
@@ -6,8 +7,11 @@ const workoutRoutes = require('./routes/workoutRoutes.js');
 const progressRoutes = require('./routes/progressRoutes.js');
 const nutritionRoutes = require('./routes/nutritionRoutes.js');
 const selectionRoutes = require('./routes/selectionRoutes');
+const sequelize = require('./connection.js');
+
 const cors = require('cors');
 const app = express();
+
 
 app.use(cors());
 app.use(express.json({limit: '50mb'}));
@@ -27,6 +31,12 @@ app.use('/api/selections', selectionRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'Client', 'build', 'index.html'));
+});
+
+sequelize.sync().then(() => {
+  console.log('Database synced');
+}).catch((error) => {
+  console.log('Error syncing database: ', error);
 });
 
 const PORT = process.env.PORT || 3000;
