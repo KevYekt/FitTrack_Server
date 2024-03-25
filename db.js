@@ -1,11 +1,20 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
-// Initialize Sequelize
-const sequelize = new Sequelize('fittrack_db', 'root', 'rootroot', {
-  host: 'localhost',
-  dialect: 'mysql'
-});
 
+
+// Initialize Sequelize
+let sequelize;
+
+// Check for JAWSDB_URL to use JawsDB on Heroku
+if (process.env.JAWSDB_URL) {
+    sequelize = new Sequelize(process.env.JAWSDB_URL);
+} else {
+    // Use local database credentials
+    sequelize = new Sequelize('fittrack_db', 'root', 'rootroot', {
+        host: 'localhost',
+        dialect: 'mysql'
+    });
+}
 // Define Models
 const User = sequelize.define('User', {
   userId: {
