@@ -26,7 +26,7 @@ const ProfilePage = () => {
   // Function to fetch profile data
   const fetchProfile = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/users/profile`, {
+      const response = await axios.get(`${BASE_URL}api/users/profile`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -69,7 +69,7 @@ const ProfilePage = () => {
   
 
       try {
-        await axios.put(`${BASE_URL}/api/users/profile/${userId}`, updatedProfileData, {
+        await axios.put(`${BASE_URL}api/users/profile/${userId}`, updatedProfileData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

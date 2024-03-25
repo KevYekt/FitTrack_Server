@@ -13,7 +13,7 @@ const LoginForm = ({ onLoginSuccess }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${BASE_URL}/api/users/login`, {
+      const response = await axios.post(`${BASE_URL}api/users/login`, {
         email,
         password,
       });

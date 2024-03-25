@@ -18,7 +18,7 @@ const NutritionLogsPage = () => {
           setError('Authentication error. Please log in.');
           return;
         }
-        const response = await axios.get(`${BASE_URL}/api/nutrition/recipesByNutrients`, {
+        const response = await axios.get(`${BASE_URL}api/nutrition/recipesByNutrients`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

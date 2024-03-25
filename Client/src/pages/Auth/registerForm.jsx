@@ -23,7 +23,7 @@ const RegisterForm = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${BASE_URL}/api/users/register`, formData);
+      const response = await axios.post(`${BASE_URL}api/users/register`, formData);
       localStorage.setItem('token', response.data.token); // Store the token
       navigate('/profile'); // Navigate to profile page
     } catch (error) {

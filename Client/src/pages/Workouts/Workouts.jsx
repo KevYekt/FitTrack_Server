@@ -13,7 +13,7 @@ const WorkoutPage = () => {
       const token = localStorage.getItem('token');
       console.log('Token:', token);
       try {
-        const response = await axios.get(`${BASE_URL}/api/workouts/exercises/goal`, {
+        const response = await axios.get(`${BASE_URL}api/workouts/exercises/goal`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -50,7 +50,7 @@ const WorkoutPage = () => {
     const userId = decoded.userId; // Extract userId from decoded token
 
     try {
-      await axios.post(`${BASE_URL}/api/selections/workouts`, {
+      await axios.post(`${BASE_URL}api/selections/workouts`, {
         userId,
         workoutIds: Array.from(selectedExercises),
         date: new Date().toISOString().split('T')[0],
